@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-z7a0af_ehb$*rm4o_r@3qmlvanvjxred&jmm02wog0993ddki1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*'] # '*' ka matlab hai sabhi hosts allowed hain
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    'corsheaders.middleware.CorsMiddleware', # humara
+    "corsheaders.middleware.CorsMiddleware",  # humara
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -128,30 +128,32 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://smart-todo-react.vercel.app",
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
 
 from celery.schedules import crontab
 
 # Email Settings (Testing ke liye console par email dikhayega)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Celery Configuration
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Kolkata'
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "Asia/Kolkata"
 
 # Celery Beat (Scheduler) Settings
 CELERY_BEAT_SCHEDULE = {
-    'send-daily-summary': {
-        'task': 'tasks.tasks.send_daily_summary_email',
-        'schedule': crontab(hour=20, minute=0),     },
+    "send-daily-summary": {
+        "task": "tasks.tasks.send_daily_summary_email",
+        "schedule": crontab(hour=20, minute=0),
+    },
 }
